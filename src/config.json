@@ -1,0 +1,6 @@
+{
+  "processList": [
+    "php-fpm",
+    "httpd"
+  ]
+}
