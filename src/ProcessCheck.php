@@ -16,7 +16,9 @@ class ProcessCheck
     /**
      * ini path
      */
-    protected $ini_path = "./config.json";
+    const BASIC_CONFIGPATH = "./config.json";
+    protected $configPath = "";
+
     private $parser;
 
     private $processList = array();
@@ -29,17 +31,22 @@ class ProcessCheck
     /**
      * @return mixed
      */
-    public function getIniPath()
+    public function getConfigPath()
     {
-        return $this->ini_path;
+        return $this->configPath;
     }
 
     /**
-     * @param mixed $ini_path
+     * Set path for load Config files.
+     *
+     * @param String $config_path
      */
-    public function setIniPath($ini_path)
+    public function setConfigPath($config_path = "")
     {
-        $this->ini_path = $ini_path;
+        if(trim($config_path) === "") {
+            $config_path = self::BASIC_CONFIGPATH;
+        }
+        $this->configPath = $config_path;
     }
 
     /**
@@ -47,7 +54,7 @@ class ProcessCheck
      */
     private function getConfig()
     {
-        $iniData = file_get_contents($this->ini_path);
+        $iniData = file_get_contents($this->configPath);
         $result = json_decode($iniData, true);
 
         try {
