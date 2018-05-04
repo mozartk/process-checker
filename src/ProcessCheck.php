@@ -116,11 +116,10 @@ class ProcessCheck
     public function run()
     {
         $this->readConfig();
-        $data = array();
         foreach($this->processList as $key=>$val) {
-            $pid = $this->findProcess($val);
+            $pid  = $this->findProcess($val);
             $info = $this->getProcess($pid);
-            $this->parser->parse($info);
+            $this->parser->parse($val, $info);
         }
 
         return $this->parser->get();

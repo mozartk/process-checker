@@ -6,16 +6,16 @@ namespace mozartk\processCheck\Process;
 class JsonParsing implements ParserInterface
 {
     private $parseData = array();
-    public function parse($data = null)
+    public function parse($processName, $data = null)
     {
         $jsonData = array();
         $jsonData['name'] = $data->getName();
         $jsonData['name_w'] = $data->getWindowTitle();
         $jsonData['cputime'] = $data->getCpuTime();
         $jsonData['pid'] = $data->getPid();
-        $jsonData['running'] = $data->isRunning();
+        $jsonData['running'] = (boolean) $data->isRunning();
 
-        $this->parseData[] = $jsonData;
+        $this->parseData[$processName] = $jsonData;
     }
 
     public function clear()
