@@ -16,6 +16,15 @@ class ProcessCheckTest extends TestCase
 
         $process->setConfigPath(" ");
         $this->assertEquals(ProcessCheck::BASIC_CONFIGPATH, $process->getConfigPath());
+    }
+
+    public function testRunNotExistsConfig()
+    {
+        $this->expectException('mozartk\processCheck\Exception\LoadConfigException');
+
+        $process = new ProcessCheck();
+        $process->setConfigPath("/mozartk/notExistsFiles");
+        $process->run();
 
     }
 }
