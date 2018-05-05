@@ -31,8 +31,8 @@ class ProcessCheck
      */
     public function getConfigPath()
     {
-        if(trim($this->config_path) === "") {
-            $config_path = self::BASIC_CONFIGPATH;
+        if(trim($this->configPath) === "") {
+            $this->configPath = self::BASIC_CONFIGPATH;
         }
 
         return $this->configPath;
