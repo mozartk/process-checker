@@ -3,7 +3,7 @@
 namespace mozartk\processCheck\Process;
 
 
-interface ParserInterface
+interface ResultInterface
 {
     public function parse($processName, $data);
     public function clear();
