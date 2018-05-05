@@ -2,13 +2,11 @@
 
 namespace mozartk\processCheck;
 
-use \Monolog\Logger as Logger;
-use \Monolog\Handler\StreamHandler;
 use \Craftpip\ProcessHandler\ProcessHandler;
-use mozartk\processCheck\Process\JsonParsing;
-use phpDocumentor\Reflection\Types\Integer;
-use \Symfony\Component\Process\Process;
+use mozartk\processCheck\Process\JsonResult;
 use mozartk\processCheck\Exception\LoadConfigException;
+use mozartk\processCheck\Exception\ProcessException;
+use mozartk\processCheck\Lib\Config;
 
 class ProcessCheck
 {
@@ -25,7 +23,7 @@ class ProcessCheck
 
     public function __construct()
     {
-        $this->parser = new JsonParsing();
+        $this->parser = new JsonResult();
     }
 
     /**
@@ -33,6 +31,10 @@ class ProcessCheck
      */
     public function getConfigPath()
     {
+        if(trim($this->config_path) === "") {
+            $config_path = self::BASIC_CONFIGPATH;
+        }
+
         return $this->configPath;
     }
 
@@ -46,89 +48,122 @@ class ProcessCheck
         if(trim($config_path) === "") {
             $config_path = self::BASIC_CONFIGPATH;
         }
+
         $this->configPath = $config_path;
+    }
+
+    private function checkIniFiles($config_path)
+    {
+        $exists = file_exists($config_path);
+        $readable = is_readable($config_path);
+
+        if(!$exists) {
+            throw new LoadConfigException("The configuration file does not exist.");
+        }
+
+        if(!$readable) {
+            throw new LoadConfigException("Cannot read configuration file.");
+        }
+
+        return true;
     }
 
     /**
      * Load Config file for processCheck
      */
-    private function getConfig()
+    private function loadConfig()
     {
-        $iniData = file_get_contents($this->configPath);
-        $result = json_decode($iniData, true);
-
-        try {
-            if (json_last_error() !== JSON_ERROR_NONE) {
-                throw new LoadConfigException("JSON_LOAD_ERROR : [".json_last_error().'] '.json_last_error_msg());
-            }
-        } catch(LoadConfigException $e) {
-            return false;
-        } catch(\Exception $e) {
-            return false;
-        }
-
+        $result = new Config($this->configPath);
         return $result;
     }
 
     /**
      * Get informations from config arrays.
      *
-     * @param array $configContents Config arrays.
+     * @param  $configContents.
      */
-    private function parsingConfig(array $configContents)
+    private function parsingConfig(Config $configContents)
     {
         $this->processList = array();
-        $parser = new JsonParsing();
         foreach($configContents['processList'] as $key=>$val) {
-            $processList[] = $val;
+            $this->processList[] = $val;
         }
-
-        $this->processList = $processList;
     }
 
     private function readConfig()
     {
-        $data = $this->getConfig();
-        $resultData = null;
-        if($data !== false) {
-            $resultData = $this->parsingConfig($data);
+        $this->checkIniFiles($this->configPath);
+        $data = $this->loadConfig();
+        $this->parsingConfig($data);
+
+        if(is_array($this->processList)) {
+            return true;
         } else {
             return false;
         }
     }
 
+    /**
+     * @param string $processName
+     * @return array
+     */
     private function findProcess($processName = "")
     {
         $processHandler = new ProcessHandler();
         $process = $processHandler->getAllProcesses();
 
-        $pattern = '/\/'.$processName.'\s/';
-        $pid = "";
+        $pattern = '/'.$processName.'/';
+        $pid = array();
+
         foreach($process as $key=>$val) {
             if(preg_match($pattern, $val->getName())){
-                $pid = $val->getPid();
-                break;
+                $pid[] = $val->getPid();
             }
         }
 
         return $pid;
     }
 
+    /**
+     * @param mixed $pid
+     * @return array
+     * @throws ProcessException
+     * @throws \Craftpip\ProcessHandler\Exception\ProcessHandlerException
+     */
+
     private function getProcess($pid = -99)
     {
+        $pids = array();
+        $result = array();
         $processHandler = new ProcessHandler();
-        return $processHandler->getProcess($pid);
+        if(is_numeric($pid)) {
+            $pids[] = $pid;
+        } else if(is_array($pid)){
+            $pids = $pid;
+        } else {
+            throw new ProcessException("pid type is wrong.");
+        }
+
+        foreach($pids as $p) {
+            $processHandler->setPid($p);
+            $result[] = $processHandler->getProcess();
+        }
+
+        return $result;
     }
 
     public function run()
     {
-        $this->readConfig();
-        foreach($this->processList as $key=>$val) {
-            $pid  = $this->findProcess($val);
-            $info = $this->getProcess($pid);
-            $this->parser->parse($val, $info);
-        }
+        if($this->readConfig()){
+            foreach($this->processList as $key=>$val) {
+                $pid  = $this->findProcess($val);
+                $info = $this->getProcess($pid);
+                $this->parser->parse($val, $info);
+            }
 
-        return $this->parser->get();
+            return $this->parser->get();
+        } else {
+            return false;
+        }
     }
 }
