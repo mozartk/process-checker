@@ -1,0 +1,7 @@
+{
+  "processList": [
+    "php",
+    "httpd"
+  ],
+  "output" : "json"
+}
