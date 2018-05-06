@@ -47,7 +47,6 @@ class ProcessCheckTest extends TestCase
         $result = $process->run();
 
         $jsonResult = json_decode($result);
-        print_r($jsonResult);
         $this->assertEquals(json_last_error(),JSON_ERROR_NONE);
     }
 }

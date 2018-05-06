@@ -1,7 +1,6 @@
 {
   "processList": [
-    "php",
-    "httpd"
+    "php"
   ],
   "output" : "json"
 }
