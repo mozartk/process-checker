@@ -3,5 +3,5 @@
     "php-fpm",
     "httpd"
   ],
-  "output" : "json"
+  "outputMode" : "json"
 }

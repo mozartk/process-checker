@@ -3,6 +3,7 @@
 namespace mozartk\processCheck;
 
 use \Craftpip\ProcessHandler\ProcessHandler;
+use mozartk\processCheck\Exception\NotExistsParserResultException;
 use mozartk\processCheck\Process\JsonResult;
 use mozartk\processCheck\Process\YamlResult;
 use mozartk\processCheck\Process\IniResult;
@@ -19,13 +20,36 @@ class ProcessCheck
     const BASIC_CONFIGPATH = "./config.json";
     protected $configPath = "";
 
+    /**
+     *
+     */
+    const RESULT_PARSER_NAMESPACE = "\\mozartk\\processCheck\\Process\\";
+
+    /**
+     * Set Output mode
+     *
+     * @var String
+     */
+    private $outputMode = "Json";
+
+    /**
+     * Stores the configuration data
+     *
+     * @var array
+     */
+    private $processList = array();
+
+
+    /**
+     * Result Class
+     *
+     * @var
+     */
     private $parser;
 
-    private $processList = array();
 
     public function __construct()
     {
-        $this->parser = new JsonResult();
     }
 
     /**
@@ -86,8 +110,19 @@ class ProcessCheck
      */
     private function parsingConfig(Config $configContents)
     {
+        $this->setOutputMode($configContents['outputMode']);
+        $this->makeProcessList($configContents['processList']);
+    }
+
+    private function setOutputMode($outputMode = "")
+    {
+        $this->outputMode = ucfirst($outputMode);
+    }
+
+    private function makeProcessList($processArray)
+    {
         $this->processList = array();
-        foreach($configContents['processList'] as $key=>$val) {
+        foreach($processArray as $key=>$val) {
             $this->processList[] = $val;
         }
     }
@@ -103,6 +138,17 @@ class ProcessCheck
         } else {
             return false;
         }
+    }
+
+    private function loadParser($mode)
+    {
+        $className = self::RESULT_PARSER_NAMESPACE.ucfirst($mode)."Result";
+        $result = class_exists($className);
+        if($result === false) {
+            throw new NotExistsParserResultException("Result ClassName does not exist.");
+        }
+
+        return new $className();
     }
 
     /**
@@ -157,6 +203,7 @@ class ProcessCheck
     public function run()
     {
         if($this->readConfig()){
+            $this->parser = $this->loadParser($this->outputMode);
             $this->parser->clear();
             foreach($this->processList as $key=>$val) {
                 $pid  = $this->findProcess($val);
