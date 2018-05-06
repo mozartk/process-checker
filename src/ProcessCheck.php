@@ -4,6 +4,8 @@ namespace mozartk\processCheck;
 
 use \Craftpip\ProcessHandler\ProcessHandler;
 use mozartk\processCheck\Process\JsonResult;
+use mozartk\processCheck\Process\YamlResult;
+use mozartk\processCheck\Process\IniResult;
 use mozartk\processCheck\Exception\LoadConfigException;
 use mozartk\processCheck\Exception\ProcessException;
 use mozartk\processCheck\Lib\Config;
@@ -155,6 +157,7 @@ class ProcessCheck
     public function run()
     {
         if($this->readConfig()){
+            $this->parser->clear();
             foreach($this->processList as $key=>$val) {
                 $pid  = $this->findProcess($val);
                 $info = $this->getProcess($pid);
