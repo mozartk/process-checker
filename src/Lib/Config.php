@@ -1,12 +1,14 @@
 <?php
 
 namespace mozartk\processCheck\Lib;
-use Noodlehaus\Config as NConfig;
 
-class Config extends NConfig implements \ArrayAccess
+class Config extends ConfigBasic
 {
-    public function __construct($path)
+    public function __construct()
     {
-        parent::__construct($path);
     }
+
+
+
+
 }
