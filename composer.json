@@ -24,7 +24,8 @@
     "monolog/monolog": "~1.13",
     "craftpip/process-handler": "dev-master",
     "hassankhan/config" : "~0.11",
-    "symfony/yaml" : "~2"
+    "symfony/yaml" : "~2",
+    "matomo/ini" : "~2"
   },
   "require-dev": {
     "phpunit/phpunit": "^6"

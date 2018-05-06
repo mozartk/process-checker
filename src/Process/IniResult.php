@@ -2,9 +2,9 @@
 
 namespace mozartk\processCheck\Process;
 
-use Symfony\Component\Yaml\Yaml;
+use Matomo\Ini\IniWriter;
 
-class YamlResult implements ResultInterface
+class IniResult implements ResultInterface
 {
     private $parseData = array();
     public function parse($processName, $data = null)
@@ -16,7 +16,9 @@ class YamlResult implements ResultInterface
             $jsonData['cputime'] = $process->getCpuTime();
             $jsonData['pid'] = (int)$process->getPid();
             $jsonData['running'] = (boolean) $process->isRunning();
-            $this->parseData[$processName][] = $jsonData;
+
+            $withPidName = $processName.'('.(int)$process->getPid().')';
+            $this->parseData[$withPidName] = $jsonData;
         }
     }
 
@@ -27,6 +29,7 @@ class YamlResult implements ResultInterface
 
     public function get()
     {
-        return Yaml::dump($this->parseData, 5);
+        $writer = new IniWriter();
+        return $writer->writeToString($this->parseData);
     }
 }
