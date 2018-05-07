@@ -1,13 +1,13 @@
 <?php
 
 namespace mozartk\processCheck\Test;
+
 use mozartk\processCheck\ProcessCheck;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Yaml\Yaml;
 
 class ProcessCheckTest extends TestCase
 {
-
     public function testSetConfigPath()
     {
         $this->expectException('mozartk\processCheck\Exception\LoadConfigException');
@@ -47,7 +47,7 @@ class ProcessCheckTest extends TestCase
         $result = $process->run();
 
         json_decode($result);
-        $this->assertEquals(json_last_error(),JSON_ERROR_NONE);
+        $this->assertEquals(json_last_error(), JSON_ERROR_NONE);
     }
 
     public function testResultYaml()

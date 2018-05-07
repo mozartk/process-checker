@@ -9,7 +9,7 @@ class IniResult implements ResultInterface
     private $parseData = array();
     public function parse($processName, $data = null)
     {
-        foreach($data as $idx=>$process) {
+        foreach ($data as $idx=>$process) {
             $jsonData = array();
             $jsonData['name'] = $process->getName();
             $jsonData['name_w'] = $process->getWindowTitle();

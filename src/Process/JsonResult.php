@@ -2,7 +2,6 @@
 
 namespace mozartk\processCheck\Process;
 
-
 class JsonResult implements ResultInterface
 {
     private $parseData = array();
@@ -10,7 +9,7 @@ class JsonResult implements ResultInterface
     {
         $jsonData = array();
         $this->parseData[$processName] = array();
-        foreach($data as $process) {
+        foreach ($data as $process) {
             $jsonData['name'] = $process->getName();
             $jsonData['name_w'] = $process->getWindowTitle();
             $jsonData['cputime'] = $process->getCpuTime();
