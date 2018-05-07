@@ -1,6 +1,6 @@
 {
   "name": "mozartk/process-checker",
-  "description": "processCheck",
+  "description": "Get list of running processes by process name, supports Windows and unix, macOS",
   "keywords": [
     "check",
     "monitor",
