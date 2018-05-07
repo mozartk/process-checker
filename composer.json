@@ -1,8 +1,10 @@
 {
-  "name": "mozartk/processCheck",
+  "name": "mozartk/process-checker",
   "description": "processCheck",
   "keywords": [
-    "check"
+    "check",
+    "monitor",
+    "process"
   ],
   "homepage": "https://github.com/mozartk",
   "license": "MIT",
@@ -38,11 +40,6 @@
   "autoload-dev": {
     "psr-4": {
       "mozartk\\processCheck\\Test\\": "tests"
-    }
-  },
-  "extra": {
-    "branch-alias": {
-      "dev-master": "v1.0.3-addMacOS"
     }
   }
 }

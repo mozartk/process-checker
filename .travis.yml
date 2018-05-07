@@ -15,9 +15,7 @@ matrix:
     - php: 5.3
       dist: precise
 
-before_script:
-  - travis_retry composer self-update
-  - travis_retry composer install --no-interaction --prefer-source --dev
+install: composer install
 
 script:
   - phpunit --coverage-text --coverage-clover=coverage.clover
