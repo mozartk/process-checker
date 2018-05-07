@@ -8,10 +8,11 @@ use Symfony\Component\Yaml\Yaml;
 
 class ProcessCheckTest extends TestCase
 {
+    /**
+     * @expectedException \mozartk\processCheck\Exception\LoadConfigException
+     */
     public function testSetConfigPath()
     {
-        $this->expectException('mozartk\processCheck\Exception\LoadConfigException');
-
         $testPath = "/config/file/not/exists";
         $process = new ProcessCheck();
         $process->setConfigPath($testPath);
@@ -29,15 +30,6 @@ class ProcessCheckTest extends TestCase
 
         }
     */
-    public function testResultClassDoesNotExists()
-    {
-        $this->expectException('mozartk\processCheck\Exception\NotExistsParserResultException');
-
-        $testPath = "tests/config.wrongclass.json";
-        $process = new ProcessCheck();
-        $process->setConfigPath($testPath);
-        $process->run();
-    }
 
     public function testResultJson()
     {
@@ -72,10 +64,11 @@ class ProcessCheckTest extends TestCase
         $this->assertTrue(is_array(parse_ini_string($result)));
     }
 
+    /**
+     * @expectedException \mozartk\processCheck\Exception\NotExistsParserResultException
+     */
     public function testResultClassNotExists()
     {
-        $this->expectException("mozartk\processCheck\Exception\NotExistsParserResultException");
-
         $testPath = "tests/config.wrongclass.json";
         $process = new ProcessCheck();
         $process->setConfigPath($testPath);
