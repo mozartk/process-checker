@@ -18,7 +18,8 @@
   "repositories": [
     {
       "type": "vcs",
-      "url": "https://github.com/mozartk/process-handler"
+      "url": "https://github.com/mozartk/process-handler",
+      "no-api": true
     }
   ],
   "require": {

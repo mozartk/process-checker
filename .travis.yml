@@ -16,7 +16,6 @@ matrix:
       dist: precise
 
 install:
-  - composer config github-oauth.github.com $GITHUB_APITOKEN;
   - travis_retry composer install --prefer-dist --no-interaction;
 
 script:
