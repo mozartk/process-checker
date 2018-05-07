@@ -15,7 +15,9 @@ matrix:
     - php: 5.3
       dist: precise
 
-install: composer install
+install:
+  - composer config github-oauth.github.com $GITHUB_APITOKEN;
+  - travis_retry composer install --prefer-dist --no-interaction;
 
 script:
   - phpunit --coverage-text --coverage-clover=coverage.clover
