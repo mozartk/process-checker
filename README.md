@@ -82,7 +82,7 @@ php-fpm:
         running: true
 httpd:
     -
-        name: '/usr/local/opt/httpd/bin/httpd -D FOREGROUND'
+        name: '/bin/httpd -D FOREGROUND'
         name_w: false
         cputime: '0:44.38'
         pid: 94
