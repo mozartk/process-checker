@@ -22,15 +22,15 @@ First, you need a config file in JSON format.
   
 And run tue php script : 
 ```php
-require "vendor/autoload.php";  
-  
-use mozartk\process-checker\Process-checker;  
-  
-$processHandler = new ProcessCheck();  
-$processHandler->setConfigPath("config.json");  
-$data = $processHandler->run();  
-  
-print_r($data);  
+require "vendor/autoload.php";
+
+use mozartk\ProcessChecker\ProcessChecker;
+
+$processHandler = new ProcessChecker();
+$processHandler->setConfigPath("config.json");
+$data = $processHandler->run();
+
+print_r($data); 
 ```  
 
 ### Results
