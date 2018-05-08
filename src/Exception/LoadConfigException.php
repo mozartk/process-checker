@@ -1,6 +1,6 @@
 <?php
 
-namespace mozartk\processChecker\Exception;
+namespace mozartk\ProcessChecker\Exception;
 
 
 class LoadConfigException extends \Exception

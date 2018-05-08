@@ -1,8 +1,8 @@
 <?php
 
-namespace mozartk\processChecker\Lib;
+namespace mozartk\ProcessChecker\Lib;
 
-use mozartk\processChecker\Exception\LoadConfigException;
+use mozartk\ProcessChecker\Exception\LoadConfigException;
 use Noodlehaus\Config as NConfig;
 
 abstract class ConfigBasic

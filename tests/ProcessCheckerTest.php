@@ -1,15 +1,15 @@
 <?php
 
-namespace mozartk\processChecker\Test;
+namespace mozartk\ProcessChecker\Test;
 
-use mozartk\processChecker\ProcessChecker;
+use mozartk\ProcessChecker\ProcessChecker;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Yaml\Yaml;
 
 class ProcessCheckerTest extends TestCase
 {
     /**
-     * @expectedException \mozartk\processChecker\Exception\LoadConfigException
+     * @expectedException \mozartk\ProcessChecker\Exception\LoadConfigException
      */
     public function testSetConfigPath()
     {
@@ -21,7 +21,7 @@ class ProcessCheckerTest extends TestCase
     /*
         public function testCantReadableConfig()
         {
-            $this->expectException('mozartk\processChecker\Exception\LoadConfigException');
+            $this->expectException('mozartk\ProcessChecker\Exception\LoadConfigException');
 
             $testPath = "tests/config.imp.json";
             $process = new ProcessChecker();
@@ -65,7 +65,7 @@ class ProcessCheckerTest extends TestCase
     }
 
     /**
-     * @expectedException \mozartk\processChecker\Exception\NotExistsParserResultException
+     * @expectedException \mozartk\ProcessChecker\Exception\NotExistsParserResultException
      */
     public function testResultClassNotExists()
     {
