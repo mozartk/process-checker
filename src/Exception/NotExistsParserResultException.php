@@ -1,6 +1,6 @@
 <?php
 
-namespace mozartk\processCheck\Exception;
+namespace mozartk\processChecker\Exception;
 
 
 class NotExistsParserResultException extends \Exception

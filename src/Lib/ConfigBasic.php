@@ -1,8 +1,8 @@
 <?php
 
-namespace mozartk\processCheck\Lib;
+namespace mozartk\processChecker\Lib;
 
-use mozartk\processCheck\Exception\LoadConfigException;
+use mozartk\processChecker\Exception\LoadConfigException;
 use Noodlehaus\Config as NConfig;
 
 abstract class ConfigBasic
@@ -96,7 +96,7 @@ abstract class ConfigBasic
     }
 
     /**
-     * Load Config file for processCheck
+     * Load Config file for processChecker
      */
     private function loadConfig()
     {

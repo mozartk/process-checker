@@ -1,30 +1,30 @@
 <?php
 
-namespace mozartk\processCheck\Test;
+namespace mozartk\processChecker\Test;
 
-use mozartk\processCheck\ProcessCheck;
+use mozartk\processChecker\ProcessChecker;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Yaml\Yaml;
 
-class ProcessCheckTest extends TestCase
+class ProcessCheckerTest extends TestCase
 {
     /**
-     * @expectedException \mozartk\processCheck\Exception\LoadConfigException
+     * @expectedException \mozartk\processChecker\Exception\LoadConfigException
      */
     public function testSetConfigPath()
     {
         $testPath = "/config/file/not/exists";
-        $process = new ProcessCheck();
+        $process = new ProcessChecker();
         $process->setConfigPath($testPath);
         $this->assertEquals($testPath, $process->getConfigPath());
     }
     /*
         public function testCantReadableConfig()
         {
-            $this->expectException('mozartk\processCheck\Exception\LoadConfigException');
+            $this->expectException('mozartk\processChecker\Exception\LoadConfigException');
 
             $testPath = "tests/config.imp.json";
-            $process = new ProcessCheck();
+            $process = new ProcessChecker();
             $process->setConfigPath($testPath);
             $this->assertEquals($testPath, $process->getConfigPath());
 
@@ -34,7 +34,7 @@ class ProcessCheckTest extends TestCase
     public function testResultJson()
     {
         $testPath = "tests/config.json";
-        $process = new ProcessCheck();
+        $process = new ProcessChecker();
         $process->setConfigPath($testPath);
         $result = $process->run();
 
@@ -45,7 +45,7 @@ class ProcessCheckTest extends TestCase
     public function testResultYaml()
     {
         $testPath = "tests/config.yaml.json";
-        $process = new ProcessCheck();
+        $process = new ProcessChecker();
         $process->setConfigPath($testPath);
         $result = $process->run();
 
@@ -57,7 +57,7 @@ class ProcessCheckTest extends TestCase
     public function testResultIni()
     {
         $testPath = "tests/config.ini.json";
-        $process = new ProcessCheck();
+        $process = new ProcessChecker();
         $process->setConfigPath($testPath);
         $result = $process->run();
 
@@ -65,12 +65,12 @@ class ProcessCheckTest extends TestCase
     }
 
     /**
-     * @expectedException \mozartk\processCheck\Exception\NotExistsParserResultException
+     * @expectedException \mozartk\processChecker\Exception\NotExistsParserResultException
      */
     public function testResultClassNotExists()
     {
         $testPath = "tests/config.wrongclass.json";
-        $process = new ProcessCheck();
+        $process = new ProcessChecker();
         $process->setConfigPath($testPath);
         $result = $process->run();
     }

@@ -1,6 +1,6 @@
 <?php
 
-namespace mozartk\processCheck\Process;
+namespace mozartk\processChecker\Process;
 
 use Matomo\Ini\IniWriter;
 

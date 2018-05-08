@@ -1,6 +1,6 @@
 <?php
 
-namespace mozartk\processCheck\Lib;
+namespace mozartk\processChecker\Lib;
 
 class Config extends ConfigBasic
 {

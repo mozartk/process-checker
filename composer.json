@@ -35,12 +35,12 @@
   },
   "autoload": {
     "psr-4": {
-      "mozartk\\processCheck\\": "src"
+      "mozartk\\processChecker\\": "src"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "mozartk\\processCheck\\Test\\": "tests"
+      "mozartk\\processChecker\\Test\\": "tests"
     }
   }
 }
