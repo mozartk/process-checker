@@ -2,7 +2,6 @@ language: php
 os:
   - linux
   - windows
-  - osx
 
 php:
   - 7.2
