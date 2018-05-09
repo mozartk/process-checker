@@ -1,8 +1,7 @@
 {
   "processList": [
     "php-fpm",
-    "httpd",
-    "kbs"
+    "httpd"
   ],
   "outputMode" : "array"
 }

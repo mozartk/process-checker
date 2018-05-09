@@ -74,7 +74,6 @@ class ProcessChecker
      * @throws ProcessException
      * @throws \Craftpip\ProcessHandler\Exception\ProcessHandlerException
      */
-
     private function getProcess($pid = -99)
     {
         $pids = array();
