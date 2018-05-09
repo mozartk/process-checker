@@ -16,7 +16,6 @@ class ProcessCheckerTest extends TestCase
         $testPath = "/config/file/not/exists";
         $process = new ProcessChecker();
         $process->setConfigPath($testPath);
-        $this->assertEquals($testPath, $process->getConfigPath());
     }
     /*
         public function testCantReadableConfig()
@@ -64,6 +63,16 @@ class ProcessCheckerTest extends TestCase
         $this->assertTrue(is_array(parse_ini_string($result)));
     }
 
+    public function testResultArray()
+    {
+        $testPath = "tests/config.array.json";
+        $process = new ProcessChecker();
+        $process->setConfigPath($testPath);
+        $result = $process->run();
+
+        $this->assertTrue(is_array($result));
+    }
+
     /**
      * @expectedException \mozartk\ProcessChecker\Exception\NotExistsParserResultException
      */
@@ -73,5 +82,13 @@ class ProcessCheckerTest extends TestCase
         $process = new ProcessChecker();
         $process->setConfigPath($testPath);
         $result = $process->run();
+    }
+
+    public function testGetConfigPath()
+    {
+        $testPath = "tests/config.json";
+        $process = new ProcessChecker();
+        $process->setConfigPath($testPath);
+        $this->assertEquals($testPath, $process->getConfigPath());
     }
 }

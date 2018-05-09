@@ -36,6 +36,11 @@ class ProcessChecker
         $this->config->setConfigPath($path);
     }
 
+    public function getConfigPath()
+    {
+        return $this->config->getConfigPath();
+    }
+
     private function loadParser($mode)
     {
         $className = self::RESULT_PARSER_NAMESPACE.ucfirst($mode)."Result";
