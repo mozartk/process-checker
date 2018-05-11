@@ -91,4 +91,15 @@ class ProcessCheckerTest extends TestCase
         $process->setConfigPath($testPath);
         $this->assertEquals($testPath, $process->getConfigPath());
     }
+
+    public function testSetProcessNameDirectly()
+    {
+        $process = new ProcessChecker();
+        $process->setProcessName(array("php"));
+        $process->setOutputMode("json");
+        $result = $process->run();
+
+        json_decode($result);
+        $this->assertEquals(json_last_error(), JSON_ERROR_NONE);
+    }
 }
