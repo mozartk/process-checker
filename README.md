@@ -39,6 +39,22 @@ $data = $processHandler->run();
 print_r($data); 
 ```  
 
+or you can try without a config file.
+```php
+<?php
+require_once "vendor/autoload.php";
+
+use mozartk\ProcessChecker\ProcessChecker;
+
+$processHandler = new ProcessChecker();
+$processHandler->setOutputMode("array");
+$processHandler->setProcessName(array("php", "httpd")); //Parameters must be an array.
+$data = $processHandler->run();
+
+print_r($data);
+
+```
+
 ### Results
 ```
 Array
