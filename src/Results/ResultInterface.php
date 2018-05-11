@@ -1,6 +1,6 @@
 <?php
 
-namespace mozartk\ProcessChecker\Process;
+namespace mozartk\ProcessChecker\Results;
 
 
 interface ResultInterface

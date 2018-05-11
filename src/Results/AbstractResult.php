@@ -1,6 +1,6 @@
 <?php
 
-namespace mozartk\ProcessChecker\Process;
+namespace mozartk\ProcessChecker\Results;
 
 
 abstract class AbstractResult implements ResultInterface

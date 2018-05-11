@@ -4,9 +4,9 @@ namespace mozartk\ProcessChecker;
 
 use \Craftpip\ProcessHandler\ProcessHandler;
 use mozartk\ProcessChecker\Exception\NotExistsParserResultException;
-use mozartk\ProcessChecker\Process\JsonResult;
-use mozartk\ProcessChecker\Process\YamlResult;
-use mozartk\ProcessChecker\Process\IniResult;
+use mozartk\ProcessChecker\Results\JsonResult;
+use mozartk\ProcessChecker\Results\YamlResult;
+use mozartk\ProcessChecker\Results\IniResult;
 use mozartk\ProcessChecker\Exception\ProcessException;
 use mozartk\ProcessChecker\Lib\Config;
 
@@ -15,7 +15,7 @@ class ProcessChecker
     /**
      *
      */
-    const RESULT_PARSER_NAMESPACE = "\\mozartk\\ProcessChecker\\Process\\";
+    const RESULT_PARSER_NAMESPACE = "\\mozartk\\ProcessChecker\\Results\\";
 
     /**
      * Result Class

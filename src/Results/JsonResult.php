@@ -1,6 +1,6 @@
 <?php
 
-namespace mozartk\ProcessChecker\Process;
+namespace mozartk\ProcessChecker\Results;
 
 class JsonResult extends AbstractResult implements ResultInterface
 {

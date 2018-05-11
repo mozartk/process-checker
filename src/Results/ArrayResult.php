@@ -1,6 +1,6 @@
 <?php
 
-namespace mozartk\ProcessChecker\Process;
+namespace mozartk\ProcessChecker\Results;
 
 class ArrayResult extends AbstractResult implements ResultInterface
 {
