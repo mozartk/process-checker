@@ -7,6 +7,7 @@ use mozartk\ProcessChecker\Exception\NotExistsParserResultException;
 use mozartk\ProcessChecker\Results\JsonResult;
 use mozartk\ProcessChecker\Results\YamlResult;
 use mozartk\ProcessChecker\Results\IniResult;
+use mozartk\ProcessChecker\Process\FindProcess;
 use mozartk\ProcessChecker\Exception\ProcessException;
 use mozartk\ProcessChecker\Lib\Config;
 
@@ -75,49 +76,29 @@ class ProcessChecker
     }
 
     /**
+     * Find Process by ProcessName
+     *
      * @param string $processName
      * @return array
      */
     private function findProcess($processName = "")
     {
-        $processHandler = new ProcessHandler();
-        $process = $processHandler->getAllProcesses();
+        $process = new FindProcess();
+        $pids = $process->findProcessByName($processName);
 
-        $pattern = '/'.$processName.'/';
-        $pid = array();
-
-        foreach ($process as $key=>$val) {
-            if (preg_match($pattern, $val->getName())) {
-                $pid[] = $val->getPid();
-            }
-        }
-
-        return $pid;
+        return $pids;
     }
 
     /**
-     * @param mixed $pid
+     * Find Process by PID
+     *
+     * @param int $pid
      * @return array
-     * @throws ProcessException
-     * @throws \Craftpip\ProcessHandler\Exception\ProcessHandlerException
      */
     private function getProcess($pid = -99)
     {
-        $pids = array();
-        $result = array();
-        $processHandler = new ProcessHandler();
-        if (is_numeric($pid)) {
-            $pids[] = $pid;
-        } elseif (is_array($pid)) {
-            $pids = $pid;
-        } else {
-            throw new ProcessException("pid type is wrong.");
-        }
-
-        foreach ($pids as $p) {
-            $processHandler->setPid($p);
-            $result[] = $processHandler->getProcess();
-        }
+        $process = new FindProcess();
+        $result = $process->findProcessByPID($pid);
 
         return $result;
     }
