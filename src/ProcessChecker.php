@@ -41,6 +41,28 @@ class ProcessChecker
         return $this->config->getConfigPath();
     }
 
+    /**
+     * set process names list for search
+     *
+     * @param array $processArr
+     */
+    public function setProcessName(array $processArr)
+    {
+        foreach($processArr as $val) {
+            $this->config->addProcessName($val);
+        }
+    }
+
+    /**
+     * set output type
+     *
+     * @param $outputType
+     */
+    public function setOutputMode($outputType)
+    {
+        $this->config->setOutputMode($outputType);
+    }
+
     private function loadParser($mode)
     {
         $className = self::RESULT_PARSER_NAMESPACE.ucfirst($mode)."Result";

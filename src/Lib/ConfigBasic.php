@@ -72,6 +72,11 @@ abstract class ConfigBasic
         $this->makeProcessList($configContents['processList']);
     }
 
+    /**
+     * Set final result format.
+     *
+     * @param string $outputMode
+     */
     public function setOutputMode($outputMode = "")
     {
         $this->outputMode = ucfirst($outputMode);
@@ -82,11 +87,21 @@ abstract class ConfigBasic
         return $this->outputMode;
     }
 
+    /**
+     * add process name for search
+     *
+     * @param string $val
+     */
+    public function addProcessName($val)
+    {
+        $this->processList[] = $val;
+    }
+
     public function makeProcessList($processArray)
     {
         $this->processList = array();
         foreach($processArray as $key=>$val) {
-            $this->processList[] = $val;
+            $this->addProcessName($val);
         }
     }
 
