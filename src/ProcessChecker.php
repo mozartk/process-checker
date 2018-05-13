@@ -2,13 +2,11 @@
 
 namespace mozartk\ProcessChecker;
 
-use \Craftpip\ProcessHandler\ProcessHandler;
 use mozartk\ProcessChecker\Exception\NotExistsParserResultException;
 use mozartk\ProcessChecker\Results\JsonResult;
 use mozartk\ProcessChecker\Results\YamlResult;
 use mozartk\ProcessChecker\Results\IniResult;
 use mozartk\ProcessChecker\Process\FindProcess;
-use mozartk\ProcessChecker\Exception\ProcessException;
 use mozartk\ProcessChecker\Lib\Config;
 
 class ProcessChecker
@@ -103,6 +101,12 @@ class ProcessChecker
         return $result;
     }
 
+    /**
+     * Get final results
+     *
+     * @return mixed
+     * @throws NotExistsParserResultException
+     */
     public function run()
     {
         $this->parser = $this->loadParser($this->config->getOutputMode());
