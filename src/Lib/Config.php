@@ -7,8 +7,4 @@ class Config extends ConfigBasic
     public function __construct()
     {
     }
-
-
-
-
 }

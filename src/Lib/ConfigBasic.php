@@ -17,6 +17,13 @@ abstract class ConfigBasic
     private $loaded = false;
     private $nconfig;
 
+    /**
+     * Check valid ini files
+     *
+     * @param $config_path
+     * @return bool
+     * @throws LoadConfigException
+     */
     private function checkIniFiles($config_path)
     {
         $exists = file_exists($config_path);
@@ -34,6 +41,8 @@ abstract class ConfigBasic
     }
 
     /**
+     * Set config path
+     *
      * @return mixed
      */
     public function getConfigPath()
