@@ -8,7 +8,7 @@
 
 namespace mozartk\ProcessChecker\Process;
 
-use Craftpip\ProcessHandler\ProcessHandler;
+use mozartk\ProcessFinder\ProcessFinder as ProcessHandler;
 
 class FindProcess implements FindProcessInterface
 {

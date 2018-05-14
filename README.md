@@ -10,7 +10,10 @@
 Now you can easily check the process information with php.  
 
 ## Installation
-Comming soon.
+```bash
+$ composer require mozartk/process-checker
+```
+
   
 ## Basic Usage
 ### How to run
@@ -28,6 +31,7 @@ First, you need a config file in JSON format.
   
 And run tue php script : 
 ```php
+<?php
 require "vendor/autoload.php";
 
 use mozartk\ProcessChecker\ProcessChecker;
@@ -55,7 +59,7 @@ print_r($data);
 
 ```
 
-### Results
+### Results  
 ```
 Array
 (
