@@ -29,7 +29,7 @@ First, you need a config file in JSON format.
 ```  
   
   
-And run tue php script : 
+And run the php script : 
 ```php
 <?php
 require "vendor/autoload.php";
