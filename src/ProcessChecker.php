@@ -11,9 +11,6 @@ use mozartk\ProcessChecker\Lib\Config;
 
 class ProcessChecker
 {
-    /**
-     *
-     */
     const RESULT_PARSER_NAMESPACE = "\\mozartk\\ProcessChecker\\Results\\";
 
     /**
